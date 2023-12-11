@@ -40,7 +40,7 @@ app.use(express.urlencoded({limit: '50mb'}));
 const limiter= rateLimit({windowMs:15*60*1000,max:3000})
 app.use(limiter)
 
-app.use("api/v1",router)
+app.use("/api/v1",router)
 
 
 

@@ -9,6 +9,7 @@ exports.BrandListService=async()=>{
         console.log(data)
         return {status:"success",data:data}
     }catch(e){
+        console.log(e)
         return {status:"fail",data:e.toString()}
     }
 }
