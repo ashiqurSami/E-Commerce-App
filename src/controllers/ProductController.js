@@ -19,3 +19,13 @@ exports.ProductListByBrand=async(req,res)=>{
     let result=await ProductServices.ListByBrandService(req)
     return res.status(200).json(result)
 }
+
+exports.ProductListByCategory=async(req,res)=>{
+    let result=await ProductServices.ListByCategoryService(req)
+    return res.status(200).json(result)
+}
+
+exports.ProductListByRemark=async(req,res)=>{
+    let result=await ProductServices.ListByRemarkService(req)
+    return res.status(200).json(result)
+}
