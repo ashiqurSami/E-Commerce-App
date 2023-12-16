@@ -99,3 +99,50 @@ exports.ListByRemarkService=async(req)=>{
         return {status:"fail",data:e}.toString()
     }
 }
+
+exports.ListBySimilarService=async(req)=>{
+    try{
+        let categoryID=new ObjectId(req.params.CategoryID)
+        let MatchStage={$match:{categoryID:categoryID}}
+        let limitStage={$limit:20}
+
+        let JoinWithBrandStage= {$lookup:{from:"brands",localField:"brandID",foreignField:"_id",as:"brand"}};
+        let JoinWithCategoryStage={$lookup:{from:"categories",localField:"categoryID",foreignField:"_id",as:"category"}};
+        let UnwindBrandStage={$unwind:"$brand"}
+        let UnwindCategoryStage={$unwind:"$category"}
+        let ProjectionStage={$project:{'brand._id':0,'category._id':0,'categoryID':0,'brandID':0}}
+        
+        let data =await ProductModel.aggregate([
+            MatchStage,limitStage,JoinWithBrandStage,JoinWithCategoryStage,
+            UnwindBrandStage,UnwindCategoryStage,ProjectionStage
+        ])
+
+        return {status:"success",data:data}
+    }catch(e){
+        return {status:"fail",data:e}.toString()
+    }
+}
+
+exports.ListByKeyWordService=async(req)=>{
+    try{
+        let SearchRegex={"$regex":req.params.keyword,"$options":"i"}
+        let SearchParams=[{title:SearchRegex},{shortDes:SearchRegex}]
+        let SearchQuery={$or:SearchParams}
+        let MatchStage={$match:SearchQuery}
+        let JoinWithBrandStage= {$lookup:{from:"brands",localField:"brandID",foreignField:"_id",as:"brand"}};
+        let JoinWithCategoryStage={$lookup:{from:"categories",localField:"categoryID",foreignField:"_id",as:"category"}};
+        let UnwindBrandStage={$unwind:"$brand"}
+        let UnwindCategoryStage={$unwind:"$category"}
+        let ProjectionStage={$project:{'brand._id':0,'category._id':0,'categoryID':0,'brandID':0}}
+        
+        let data=await ProductModel.aggregate([
+            MatchStage,JoinWithBrandStage,JoinWithCategoryStage,
+            UnwindBrandStage,UnwindCategoryStage,ProjectionStage
+        ])
+
+        return {status:"success",data:data}
+
+    }catch(e){
+        return {status:"fail",data:e}.toString()
+    }
+}

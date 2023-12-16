@@ -29,3 +29,13 @@ exports.ProductListByRemark=async(req,res)=>{
     let result=await ProductServices.ListByRemarkService(req)
     return res.status(200).json(result)
 }
+
+exports.ProductListBySimilar=async(req,res)=>{
+    let result=await ProductServices.ListBySimilarService(req)
+    return res.status(200).json(result) 
+}
+
+exports.ProductListByKeywordService=async(req,res)=>{
+    let result=await ProductServices.ListByKeyWordService(req)
+    return res.status(200).json(result)
+}
