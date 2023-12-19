@@ -12,8 +12,8 @@ router.get('/ProductListByCategory/:CategoryID',ProductController.ProductListByC
 router.get('/ProductListByRemark/:Remark',ProductController.ProductListByRemark)
 router.get('/ProductListBySimilar/:CategoryID',ProductController.ProductListBySimilar)
 router.get('/ProductListByKeyword/:keyword',ProductController.ProductListByKeywordService)
-
-
+router.get('/ProductDetails/:ProductID',ProductController.ProductDetails)
+router.get('/ProductReview/:ProductID',ProductController.ProductReviewList)
 
 
 module.exports=router

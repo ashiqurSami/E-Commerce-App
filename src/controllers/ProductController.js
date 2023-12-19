@@ -39,3 +39,13 @@ exports.ProductListByKeywordService=async(req,res)=>{
     let result=await ProductServices.ListByKeyWordService(req)
     return res.status(200).json(result)
 }
+
+exports.ProductDetails=async(req,res)=>{
+    let result=await ProductServices.ProductDetailsService(req)
+    return res.status(200).json(result) 
+}
+
+exports.ProductReviewList=async(req,res)=>{
+    let result=await ProductServices.ReviewListService(req)
+    return res.status(200).json(result)   
+}
