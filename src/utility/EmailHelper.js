@@ -18,7 +18,6 @@ exports.EmailSender=async(EmailTo,EmailText,EmailSubject)=>{
     subject: EmailSubject,
     text: EmailText
     };
-
+    
     return await transporter.sendMail(mailOptions);
-
 }

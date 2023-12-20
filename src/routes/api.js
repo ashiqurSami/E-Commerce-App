@@ -1,5 +1,6 @@
 const express=require('express')
 const ProductController=require('../controllers/ProductController')
+const UserController=require('../controllers/UserController')
 const router=express.Router()
 
 
@@ -14,6 +15,13 @@ router.get('/ProductListBySimilar/:CategoryID',ProductController.ProductListBySi
 router.get('/ProductListByKeyword/:keyword',ProductController.ProductListByKeywordService)
 router.get('/ProductDetails/:ProductID',ProductController.ProductDetails)
 router.get('/ProductReview/:ProductID',ProductController.ProductReviewList)
+
+
+//user
+router.post('/UserGetOTP/:email',UserController.UserGetOTP)
+router.put('/UserLoginVerify/:email/:OTP',UserController.VerifyLogin)
+
+
 
 
 module.exports=router
