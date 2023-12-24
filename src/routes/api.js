@@ -1,6 +1,7 @@
 const express=require('express')
 const ProductController=require('../controllers/ProductController')
 const UserController=require('../controllers/UserController')
+const AuthVerification=require('../middlewares/AuthVerification')
 const router=express.Router()
 
 
@@ -20,8 +21,9 @@ router.get('/ProductReview/:ProductID',ProductController.ProductReviewList)
 //user
 router.post('/UserGetOTP/:email',UserController.UserGetOTP)
 router.put('/UserLoginVerify/:email/:OTP',UserController.VerifyLogin)
-
-
-
+router.post('/CreateProfile',AuthVerification,UserController.CreateProfile)
+router.put('/UpdatePerofile',AuthVerification,UserController.CreateProfile)
+router.get('/ReadProfile',AuthVerification,UserController.ReadProfile)
+router.get('/UserLogout',AuthVerification,UserController.UserLogout)
 
 module.exports=router

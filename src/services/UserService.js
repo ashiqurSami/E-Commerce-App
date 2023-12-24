@@ -1,6 +1,8 @@
 const EmailHelper=require('../utility/EmailHelper')
 const TokenHelper=require('../utility/TokenHelper')
 const UserModel=require('../models/UserModel')
+const ProfileModel=require('../models/ProfileModel')
+
 
 exports.UserOTPgetService=async(req)=>{
     try{
@@ -38,5 +40,29 @@ exports.VerifyOTPService=async(req)=>{
     }catch(e){
         console.log(e.toString())
         return {status:"fail",message:"Invalid OTP",from:"catch block"}
+    }
+}
+
+exports.SaveProfileService=async(req)=>{
+    try{
+        let user_id=req.headers.user_id
+        let reqBody=req.body 
+        reqBody.userID=user_id
+        await ProfileModel.updateOne({userID:user_id},{$set:reqBody},{upsert:true})
+        return {status:"success", message:"Profile Save Success"}
+
+    }catch(e){
+        return {status:"fail", message:"Something Went Wrong"}
+    }
+}
+
+exports.ReadProfileService=async(req)=>{
+    try{
+        let user_id=req.headers.user_id
+        let result=await ProfileModel.find({userID:user_id})
+        return {status:"success", data:result}
+
+    }catch(e){
+        return {status:"fail", message:"Something Went Wrong"}
     }
 }
