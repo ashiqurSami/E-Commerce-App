@@ -52,3 +52,16 @@ exports.ViewWishListService=async(req)=>{
         return {status:"fail",message:"Something Went Wrong !"}
     }
 }
+
+exports.RemoveWish=async(req)=>{
+    try{
+        let user_id=req.headers.user_id
+        let reqBody=req.body
+        reqBody.userID=user_id
+        await WishModel.deleteOne(reqBody)
+        return {status:"success",message:"Wish List Remove Success"}
+    }
+    catch (e) {
+        return {status:"fail",message:"Something Went Wrong !"}
+    }
+}
