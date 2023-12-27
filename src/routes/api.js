@@ -29,7 +29,7 @@ router.get('/UserLogout',AuthVerification,UserController.UserLogout)
 
 //Wish List
 router.post('/SaveWishList',AuthVerification,WishListController.SaveWishList)
-
+router.get('/ViewWishList',AuthVerification,WishListController.ViewWishList)
 
 
 module.exports=router
