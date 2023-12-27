@@ -2,6 +2,7 @@ const express=require('express')
 const ProductController=require('../controllers/ProductController')
 const UserController=require('../controllers/UserController')
 const AuthVerification=require('../middlewares/AuthVerification')
+const WishListController=require('../controllers/WishListController')
 const router=express.Router()
 
 
@@ -25,5 +26,10 @@ router.post('/CreateProfile',AuthVerification,UserController.CreateProfile)
 router.put('/UpdatePerofile',AuthVerification,UserController.CreateProfile)
 router.get('/ReadProfile',AuthVerification,UserController.ReadProfile)
 router.get('/UserLogout',AuthVerification,UserController.UserLogout)
+
+//Wish List
+router.post('/SaveWishList',AuthVerification,WishListController.SaveWishList)
+
+
 
 module.exports=router

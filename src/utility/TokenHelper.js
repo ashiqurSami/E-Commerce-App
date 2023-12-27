@@ -14,6 +14,6 @@ exports.DecodeToken=(token)=>{
         let key=process.env.TOKEN_KEY
         return jwt.verify(token,key)
     }catch(e){
-        return e.toStrimg()
+        return e.toString()
     }
 }
