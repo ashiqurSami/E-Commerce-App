@@ -4,6 +4,7 @@ const UserController=require('../controllers/UserController')
 const AuthVerification=require('../middlewares/AuthVerification')
 const WishListController=require('../controllers/WishListController')
 const CartListController=require('../controllers/CartListController')
+const InvoiceController=require('../controllers/InvoiceController')
 const router=express.Router()
 
 
@@ -18,7 +19,6 @@ router.get('/ProductListBySimilar/:CategoryID',ProductController.ProductListBySi
 router.get('/ProductListByKeyword/:keyword',ProductController.ProductListByKeywordService)
 router.get('/ProductDetails/:ProductID',ProductController.ProductDetails)
 router.get('/ProductReview/:ProductID',ProductController.ProductReviewList)
-
 
 //user
 router.post('/UserGetOTP/:email',UserController.UserGetOTP)
@@ -38,6 +38,13 @@ router.post('/SaveCartList',AuthVerification,CartListController.SaveCartList)
 router.put('/UpdateCartList/:cartID',AuthVerification,CartListController.UpdateCartList)
 router.get('/ViewCartList',AuthVerification,CartListController.ViewCartList)
 router.delete('/RemoveCartList/:cartID',AuthVerification,CartListController.RemoveCartList)
+
+//Invoice 
+router.post('/CreateInvoice',AuthVerification,InvoiceController.CreateInvoice)
+router.post('/PaymentSuccess/:trxID',InvoiceController.PaymentSuccess)
+router.post('/PaymentCancel/:trxID',InvoiceController.PaymentCancel)
+router.post('/PaymentFail/:trxID',InvoiceController.PaymentFail)
+router.post('/PaymentIPN/:trxID',InvoiceController.PaymentIPN)
 
 
 
